@@ -1,0 +1,33 @@
+<!-- ITEM CARDS IMPLEMENTATION -->
+<div class="container">
+  <div class="row card-groups">
+    <div class="col-md-4" *ngFor="let raregame of raregameList">
+      <div class="card">
+        <img
+          src="https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Ftse2.mm.bing.net%2Fth%3Fid%3DOIP.nCiigzXnPHfrh67vMT6EvQHaEK%26pid%3DApi&f=1"
+          class="card-img-top"
+          alt="image"
+          style="width: 100%"
+        />
+        <div class="card-body">
+          <h4 class="card-title" style="font-weight: bold; color: brown">
+            {{ raregame.name }} #{{ raregame.number | number}}
+          </h4>
+          <div>
+            <p class="card-text" style="font-weight: bold">
+              Rank: {{ getStars(raregame.rank) }} ({{ raregame.rank }})
+            </p>
+          </div>
+          <div>
+            <p class="card-text" style="font-weight: bold">Location:</p>
+            <p>{{ raregame.location }}</p>
+          </div>
+          <div>
+            <p class="card-text" style="font-weight: bold">Condition:</p>
+            <p>{{ raregame.condition }}</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

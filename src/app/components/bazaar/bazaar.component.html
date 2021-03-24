@@ -1,0 +1,50 @@
+<!-- ITEM CARDS IMPLEMENTATION -->
+<div class="container">
+  <form class="form-inline" style="align-self: center">
+    <input
+      class="form-control mr-2"
+      type="search"
+      placeholder="Search"
+      aria-label="Search"
+    />
+    <button class="btn btn-info" type="submit">
+      <i class="fas fa-search"></i>
+    </button>
+  </form>
+</div>
+<div class="container">
+  <div *ngIf="itemList" class="row card-groups">
+    <div class="col-md-4" *ngFor="let item of itemList">
+      <div
+        class="card text-white bg-secondary mb-3"
+        style="margin-bottom: 10px"
+      >
+        <img
+          src="https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Ftse2.mm.bing.net%2Fth%3Fid%3DOIP.nCiigzXnPHfrh67vMT6EvQHaEK%26pid%3DApi&f=1"
+          class="card-img-top"
+          alt="image"
+          style="width: 100%"
+        />
+        <div class="card-body">
+          <h4 class="card-title" style="font-weight: bold">
+            {{ item.name }}
+          </h4>
+          <p class="card-text" style="font-weight: bold">Content:</p>
+          <ul *ngFor="let content of item.content">
+            <li>{{ content }}</li>
+          </ul>
+          <p class="card-text" style="font-weight: bold">Required:</p>
+          <ul *ngFor="let req of item.required">
+            <li>{{ req }}</li>
+          </ul>
+          <div>
+            <p class="card-text" style="font-weight: bold; display: inline">
+              Price:
+            </p>
+            {{ item.price | number }} gil
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
