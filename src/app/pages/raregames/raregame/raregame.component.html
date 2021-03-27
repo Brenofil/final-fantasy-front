@@ -1,0 +1,20 @@
+<div class="card" [ngStyle]="{'background-color': '#32325d ' }">
+  <img
+    class="card-img-top"
+    src="../../../../assets/img/ffxii-wallpaper-2.jpg"
+    alt="Card image cap"
+  />
+  <div class="card-body">
+    <h4 class="card-title" style="color: #17a2b8; font-weight: bold">
+      {{ raregame.name }} - #{{ raregame.number }}
+    </h4>
+    <p class="card-text" style="font-weight: bold">
+      Rank: {{ raregame.getStars() }} ({{ raregame.rank }})
+    </p>
+    <p class="card-text" style="font-weight: bold">Location:</p>
+    <p class="card-text">{{ raregame.location }}</p>
+    <p class="card-text" style="font-weight: bold">Condition:</p>
+    <p class="card-text">{{ raregame.condition }}</p>
+    <a href="#" class="btn btn-info" style="float: right">View</a>
+  </div>
+</div>

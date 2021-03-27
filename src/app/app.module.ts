@@ -1,29 +1,47 @@
-import { NgModule } from '@angular/core';
-import { BrowserModule } from '@angular/platform-browser';
-import { HttpClientModule } from '@angular/common/http';
+import { BrowserAnimationsModule } from "@angular/platform-browser/animations";
+import { NgModule } from "@angular/core";
+import { BrowserModule } from "@angular/platform-browser";
+import { FormsModule } from "@angular/forms";
+import { HttpClientModule } from "@angular/common/http";
+import { RouterModule } from "@angular/router";
+import { ToastrModule } from "ngx-toastr";
 
-import { AppRoutingModule } from './app-routing.module';
-import { AppComponent } from './app.component';
-import { HeaderComponent } from '../app/components/header/header.component';
-import { BazaarComponent } from '../app/components/bazaar/bazaar.component';
-import { RaregamesComponent } from '../app/components/raregames/raregames.component';
-import { ItemComponent } from '../app/components/bazaar/item/item.component';
-import { HomeComponent } from '../app/components/home/home.component';
-import { NotFoundComponent } from './components/not-found/not-found.component';
-import { RaregameComponent } from './components/raregames/raregame/raregame.component';
+import { AppComponent } from "./app.component";
+import { AdminLayoutComponent } from "./layouts/admin-layout/admin-layout.component";
+import { AuthLayoutComponent } from "./layouts/auth-layout/auth-layout.component";
+
+import { NgbModule } from "@ng-bootstrap/ng-bootstrap";
+
+import { AppRoutingModule } from "./app-routing.module";
+import { ComponentsModule } from "./components/components.module";
+
+import { BazaarComponent } from "./pages/bazaar/bazaar.component";
+import { ItemComponent } from "./pages/bazaar/item/item.component";
+
+import { RaregamesComponent } from "./pages/raregames/raregames.component";
+import { RaregameComponent } from "./pages/raregames/raregame/raregame.component";
 
 @NgModule({
+  imports: [
+    BrowserAnimationsModule,
+    BrowserModule,
+    FormsModule,
+    HttpClientModule,
+    ComponentsModule,
+    NgbModule,
+    RouterModule,
+    AppRoutingModule,
+    ToastrModule.forRoot(),
+  ],
   declarations: [
     AppComponent,
-    HeaderComponent,
+    AdminLayoutComponent,
+    AuthLayoutComponent,
     BazaarComponent,
-    RaregamesComponent,
     ItemComponent,
-    HomeComponent,
-    NotFoundComponent,
-    RaregameComponent,
+    RaregamesComponent,
+    RaregameComponent
   ],
-  imports: [BrowserModule, AppRoutingModule, HttpClientModule],
   providers: [],
   bootstrap: [AppComponent],
 })

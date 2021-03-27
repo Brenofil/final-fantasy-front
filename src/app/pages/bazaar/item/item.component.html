@@ -1,0 +1,32 @@
+<div class="card" [ngStyle]="{ 'background-color': '#32325d ' }">
+  <img
+    class="card-img-top"
+    src="../../../../assets/img/ffxii-wallpaper.jpg"
+    alt="Card image cap"
+  />
+  <div class="card-body">
+    <h4 class="card-title" style="color: #17a2b8; font-weight: bold">
+      {{ item.name }}
+    </h4>
+    <p class="card-text" style="font-weight: bold">Content:</p>
+    <ul class="card-text" *ngFor="let content of item.content">
+      <li style="font-weight: lighter">{{ content }}</li>
+    </ul>
+    <p class="card-text" style="font-weight: bold">Required:</p>
+    <ul class="card-text" *ngFor="let req of item.required">
+      <li style="font-weight: lighter">{{ req }}</li>
+    </ul>
+
+    <p class="card-text" style="font-weight: bold; display: inline-block">
+      Price:&nbsp;&nbsp;<span style="font-weight: lighter; color: #17a2b8"
+        >{{ item.price | number }}</span
+      >
+      <span style="font-weight: lighter;">
+        gil
+      </span>
+    </p>
+    <br />
+
+    <a href="#" class="btn btn-info" style="float: right">View</a>
+  </div>
+</div>
