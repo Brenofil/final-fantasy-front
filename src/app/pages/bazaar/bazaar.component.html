@@ -5,64 +5,34 @@
         <div class="card-header">
           <div class="row">
             <div class="col-sm-6 text-left">
+              <h2 class="title">Bazaar</h2>
               <h5 class="card-category">Final Fantasy XII Bazaar Items</h5>
-              <h2 class="card-title">Bazaar</h2>
-              <div>
-                <div ngbDropdown class="btn-group" style="float: left">
-                  <button
-                    class="btn btn-info"
-                    id="dropdownBasic2"
-                    ngbDropdownToggle
-                  >
-                    Filter
-                  </button>
-                  <div ngbDropdownMenu aria-labelledby="dropdownBasic2">
-                    <button ngbDropdownItem (click)="onFilter('name')">Bazaar Name</button>
-                    <button ngbDropdownItem (click)="onFilter('name')">Item Price</button>
-                    <div class="dropdown-divider"></div>
-                    <a ngbDropdownItem href="#">Reset Filter</a>
-                  </div>
-                </div>
-              </div>
             </div>
             <div class="col-sm-6">
               <div
                 class="btn-group btn-group-toggle float-right"
                 data-toggle="buttons"
               >
-                <label
-                  class="btn btn-sm btn-danger btn-simple"
-                  (click)="
-                    updateOptions();
-                    clicked = true;
-                    clicked1 = false;
-                    clicked2 = false
-                  "
-                  [ngClass]="{ active: clicked === true }"
-                >
-                  <input checked="checked" name="options" type="radio" />
+                <!-- 
 
-                  <span
-                    class="d-none d-sm-block d-md-block d-lg-block d-xl-block"
-                  >
+                  <label class="btn btn-sm btn-danger btn-simple"
+                  (click)="updateView('CARDS')"
+                  [ngClass]="{ active: currentView === 'CARDS' }">
+                  <input checked="checked" name="options" type="radio" />
+                  <span class="d-none d-sm-block d-md-block d-lg-block d-xl-block">
                     Cards
-                  </span>
+                  </span>  
                   <span class="d-block d-sm-none">
                     <i class="tim-icons icon-single-02"> </i>
                   </span>
                 </label>
+              -->
                 <label
                   class="btn btn-sm btn-danger btn-simple"
-                  (click)="
-                    updateOptions();
-                    clicked = false;
-                    clicked1 = true;
-                    clicked2 = false
-                  "
-                  [ngClass]="{ active: clicked1 === true }"
+                  (click)="updateView('LIST')"
+                  [ngClass]="{ active: currentView === 'LIST' }"
                 >
                   <input class="d-none d-sm-none" name="options" type="radio" />
-
                   <span
                     class="d-none d-sm-block d-md-block d-lg-block d-xl-block"
                   >
@@ -74,16 +44,10 @@
                 </label>
                 <label
                   class="btn btn-sm btn-danger btn-simple"
-                  (click)="
-                    updateOptions();
-                    clicked = false;
-                    clicked1 = false;
-                    clicked2 = true
-                  "
-                  [ngClass]="{ active: clicked2 === true }"
+                  (click)="updateView('TABLE')"
+                  [ngClass]="{ active: currentView === 'TABLE' }"
                 >
                   <input class="d-none" name="options" type="radio" />
-
                   <span
                     class="d-none d-sm-block d-md-block d-lg-block d-xl-block"
                   >
@@ -98,14 +62,98 @@
           </div>
         </div>
 
-        <hr>
+        <hr />
 
-        <div class="container">
+        <!-- *DEPRECATED* CARDS VIEW 
+        <div *ngIf="currentView === 'CARDS'" class="container">
           <div class="row card-groups">
             <div class="col-md-4" *ngFor="let item of itemList">
               <app-item [item]="item"></app-item>
             </div>
           </div>
+        </div>
+        -->
+
+        <!-- TABBLE VIEW -->
+        <div *ngIf="currentView === 'TABLE'" class="container">
+          <form class="form-inline">
+            <input type="text" class="form-control" placeholder="Search" />
+            <button type="submit" class="btn btn-link btn-icon btn-round" (click)="filterTable()">
+              <i class="tim-icons icon-zoom-split"></i>
+            </button>
+          </form>
+          <ngx-datatable
+            #bazaarTable
+            class="dark expandable"
+            [sorts]="[{ prop: 'price', dir: 'asc' }]"
+            [rows]="rows"
+            [columnMode]="'force'"
+            [headerHeight]="50"
+            [footerHeight]="50"
+            [rowHeight]="50"
+            [limit]="13"
+            (page)="onPage($event)"
+          >
+            <!-- Row Detail Template -->
+            <ngx-datatable-row-detail
+              [rowHeight]="100"
+              #myDetailRow
+              (toggle)="onDetailToggle($event)"
+            >
+              <ng-template
+                let-row="row"
+                let-expanded="expanded"
+                ngx-datatable-row-detail-template
+              >
+                <div style="padding-left: 35px">
+                  <div>
+                    <strong>Content:</strong>
+                    <p>{{ row.content }}</p>
+                  </div>
+                  <div>
+                    <strong>Required:</strong>
+                    <p>{{ row.required }}</p>
+                  </div>
+                </div>
+              </ng-template>
+            </ngx-datatable-row-detail>
+
+            <!-- Column Templates -->
+            <ngx-datatable-column
+              [width]="50"
+              [resizeable]="false"
+              [sortable]="false"
+              [draggable]="false"
+              [canAutoResize]="false"
+            >
+              <ng-template
+                let-row="row"
+                let-expanded="expanded"
+                ngx-datatable-cell-template
+              >
+                <a
+                  href="javascript:void(0)"
+                  [class.datatable-icon-right]="!expanded"
+                  [class.datatable-icon-down]="expanded"
+                  title="Expand/Collapse Row"
+                  (click)="toggleExpandRow(row)"
+                >
+                </a>
+              </ng-template>
+            </ngx-datatable-column>
+
+            <ngx-datatable-column name="name">
+              <ng-template let-row="row" ngx-datatable-cell-template>
+                {{ row.name }}
+              </ng-template>
+            </ngx-datatable-column>
+
+            <ngx-datatable-column name="price">
+              <ng-template let-row="row" ngx-datatable-cell-template>
+                {{ row.price | number }} gil.
+              </ng-template>
+            </ngx-datatable-column>
+          </ngx-datatable>
         </div>
       </div>
     </div>

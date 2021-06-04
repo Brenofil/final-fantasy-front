@@ -21,6 +21,9 @@ import { ItemComponent } from "./pages/bazaar/item/item.component";
 import { RaregamesComponent } from "./pages/raregames/raregames.component";
 import { RaregameComponent } from "./pages/raregames/raregame/raregame.component";
 
+// ngx module
+import { NgxDatatableModule } from '@swimlane/ngx-datatable';
+
 @NgModule({
   imports: [
     BrowserAnimationsModule,
@@ -32,6 +35,7 @@ import { RaregameComponent } from "./pages/raregames/raregame/raregame.component
     RouterModule,
     AppRoutingModule,
     ToastrModule.forRoot(),
+    NgxDatatableModule
   ],
   declarations: [
     AppComponent,

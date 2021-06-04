@@ -15,26 +15,22 @@ export const ROUTES: RouteInfo[] = [
   },
   {
     path: "/raregames",
-    title: "Raregames",
+    title: "Raregames (dev)",
     icon: "icon-shape-star",
     class: ""
   },
+  /*
   {
     path: "/icons",
     title: "Icons",
     icon: "icon-atom",
     class: "",
   },
+  */
   {
     path: "/maps",
     title: "Maps",
     icon: "icon-pin",
-    class: "",
-  },
-  {
-    path: "/about",
-    title: "About",
-    icon: "icon-alert-circle-exc",
     class: "",
   }
 ];

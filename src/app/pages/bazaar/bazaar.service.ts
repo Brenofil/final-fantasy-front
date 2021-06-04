@@ -6,7 +6,8 @@ export class BazaarService {
 
   private bazaarList: ItemModel[] = [];
 
-  async fetchList() {
+  async fetchList(filter: any) {
+    this.parsefilter(this.bazaarURL, filter);
     await axios
       .get(this.bazaarURL)
       .then((response) => {
@@ -21,6 +22,10 @@ export class BazaarService {
       });
 
     return this.bazaarList;
+  }
+
+  private parsefilter(url: string, filter: string) {
+    console.log('got filter');
   }
 
 }
